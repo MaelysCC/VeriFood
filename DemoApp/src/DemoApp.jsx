@@ -10,6 +10,8 @@ const PRODUCTS = [
     image: "/fromage.png",
     top: "90px",
     left: "35px",
+    width: "10px",
+    height: "10px",
   },
   {
     gtin: "3017620422003",
@@ -19,6 +21,8 @@ const PRODUCTS = [
     image: "/salade.png",
     top: "95px",
     left: "175px",
+    width: "60px",
+    height: "60px",
   },
 ];
 
@@ -234,7 +238,7 @@ export default function DemoApp() {
       {/* Frigo */}
       <div
         className="relative flex-1 bg-cover bg-center overflow-hidden"
-        style={{ backgroundImage: "url('/fridge.png')" }}
+        style={{ backgroundImage: "#dbeafe" }}
       >
         {/* Notifications */}
         {notifications.length > 0 && (
@@ -268,26 +272,20 @@ export default function DemoApp() {
             </div>
           </div>
         ) : (
-          filteredPantry.map((item, index) => {
-            const positions = [
-              { top: "52px", left: "28px" },
-              { top: "52px", left: "184px" },
-              { top: "168px", left: "24px" },
-              { top: "168px", left: "184px" },
-              { top: "284px", left: "24px" },
-              { top: "284px", left: "184px" },
-            ];
-
-            const pos = positions[index % positions.length];
-
-            return (
-              <div
-                key={item.gtin}
-                className={`absolute w-[62px] h-[62px] rounded-md overflow-hidden shadow-md border-4 ${
-                  item.recalled ? "border-red-500" : "border-emerald-500"
-                } bg-white`}
-                style={{ top: pos.top, left: pos.left }}
-              >
+          filteredPantry.map((item) => {
+  return (
+    <div
+      key={item.gtin}
+      className={`absolute rounded-md overflow-hidden shadow-md border-2 ${
+        item.recalled ? "border-red-500" : "border-emerald-500"
+      } bg-white`}
+      style={{
+        top: item.top,
+        left: item.left,
+        width: item.width,
+        height: item.height,
+      }}
+    >
                 {item.image ? (
                   <img
                     src={item.image}
