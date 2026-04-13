@@ -3,68 +3,26 @@ import { AlertTriangle, Bell, CheckCircle2, Search, ShieldAlert, Refrigerator, T
 
 const PRODUCTS = [
   {
-    gtin: "3274080005003",
-    name: "Lait demi-écrémé UHT",
-    brand: "DemoFerme",
-    category: "Produits laitiers",
-    recalled: false,
-    riskLevel: "Faible",
-    storage: "À conserver dans un endroit sec avant ouverture, puis 3 jours au réfrigérateur après ouverture.",
-    expiryAdvice: "Vérifier la DLC après ouverture.",
-    purchasedAt: null,
-  },
-  {
     gtin: "3560070976804",
     name: "Fromage frais au lait cru",
     brand: "DemoTerroir",
-    category: "Fromages",
     recalled: true,
-<<<<<<< Updated upstream
-    riskLevel: "Élevé",
-    risk: "Listeria monocytogenes",
-    recallReason: "Suspicion de contamination microbiologique.",
-    publishedAt: "2026-04-10",
-    storage: "Conserver entre 0°C et 4°C. Ne pas consommer si rappel actif.",
-    expiryAdvice: "Produit sensible, éviter toute consommation en cas de doute.",
-    purchasedAt: null,
-=======
     image: "/fromage.png",
     top: "90px",
     left: "35px",
-    width: "120px",
-    height: "120px",
-    
->>>>>>> Stashed changes
+    width: "10px",
+    height: "10px",
   },
   {
     gtin: "3017620422003",
-    name: "Pâte à tartiner noisette",
-    brand: "DemoChoco",
-    category: "Épicerie",
+    name: "Salade",
+    brand: "DemoFresh",
     recalled: false,
-<<<<<<< Updated upstream
-    riskLevel: "Faible",
-    storage: "À conserver à température ambiante, à l’abri de la chaleur.",
-    expiryAdvice: "Bien refermer après ouverture.",
-    purchasedAt: null,
-  },
-  {
-    gtin: "5449000000996",
-    name: "Boisson gazeuse citron",
-    brand: "DemoFizz",
-    category: "Boissons",
-    recalled: false,
-    riskLevel: "Moyen",
-    storage: "Conserver au frais après ouverture et consommer dans les 48 h.",
-    expiryAdvice: "Ne pas boire si l’emballage est gonflé ou abîmé.",
-    purchasedAt: null,
-=======
     image: "/salade.png",
     top: "95px",
     left: "175px",
-    width: "120px",
-    height: "120px",
->>>>>>> Stashed changes
+    width: "60px",
+    height: "60px",
   },
 ];
 
@@ -227,166 +185,17 @@ export default function DemoApp() {
   ));
 
   return (
-<<<<<<< Updated upstream
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      <div className="mx-auto max-w-7xl p-6 md:p-10">
-        <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <section className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-            <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-              <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
-                  <ShieldAlert className="h-4 w-4" /> Démo VigiFood
-                </div>
-                <h1 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">Scanner, surveiller, alerter</h1>
-                <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 md:text-base">
-                  Cette démo illustre le scénario de votre cahier des charges : scan d’un produit,
-                  vérification d’un rappel, ajout au garde-manger numérique, puis réception d’une alerte
-                  si un rappel survient après l’achat.
-                </p>
-              </div>
-              <div className="grid grid-cols-2 gap-3 text-sm">
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
-                  <div className="flex items-center gap-2 text-slate-500"><Database className="h-4 w-4" /> Source</div>
-                  <div className="mt-2 font-semibold">Rappels + produits</div>
-                </div>
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
-                  <div className="flex items-center gap-2 text-slate-500"><Bell className="h-4 w-4" /> Fonction</div>
-                  <div className="mt-2 font-semibold">Veille continue</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 grid gap-4 md:grid-cols-[1fr_auto]">
-              <div className="relative">
-                <ScanLine className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
-                <input
-                  value={barcode}
-                  onChange={(e) => setBarcode(e.target.value)}
-                  placeholder="Entrer un code-barres GTIN, par ex. 3560070976804"
-                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-12 pr-4 text-sm outline-none ring-0 transition focus:border-slate-400"
-                />
-              </div>
-              <button
-                onClick={() => handleScan()}
-                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
-              >
-                <Search className="h-4 w-4" /> Scanner
-              </button>
-            </div>
-
-            <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-              {quickScanButtons}
-            </div>
-
-            <div className="mt-8">
-              {selected ? (
-                <ProductCard product={selected} onAddToPantry={addToPantry} />
-              ) : (
-                <div className="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-10 text-center text-slate-500">
-                  Sélectionne un produit de démo ou entre un GTIN pour afficher sa fiche.
-                </div>
-              )}
-            </div>
-          </section>
-
-          <section className="space-y-6">
-            <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <h2 className="text-xl font-semibold">Garde-manger numérique</h2>
-                  <p className="mt-1 text-sm text-slate-600">Produits suivis après achat</p>
-                </div>
-                <button
-                  onClick={simulateRecallCheck}
-                  className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-800 transition hover:bg-slate-100"
-                >
-                  <Clock3 className="h-4 w-4" /> Simuler une veille
-                </button>
-              </div>
-
-              <div className="mt-4 relative">
-                <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Rechercher dans le garde-manger"
-                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm outline-none transition focus:border-slate-400"
-                />
-              </div>
-
-              <div className="mt-4 space-y-3">
-                {filteredPantry.length === 0 ? (
-                  <div className="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-6 text-sm text-slate-500">
-                    Aucun produit suivi pour le moment.
-                  </div>
-                ) : (
-                  filteredPantry.map((item) => (
-                    <div key={item.gtin} className="rounded-3xl border border-slate-200 p-4">
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <Refrigerator className="mt-0.5 h-4 w-4 text-slate-400" />
-                            <p className="font-medium text-slate-900">{item.name}</p>
-                          </div>
-                          <p className="mt-1 text-sm text-slate-600">{item.brand} · GTIN {item.gtin}</p>
-                          <p className="mt-2 text-xs text-slate-500">Ajouté le {item.purchasedAt}</p>
-                        </div>
-                        <button
-                          onClick={() => removeFromPantry(item.gtin)}
-                          className="rounded-2xl border border-slate-200 p-2 text-slate-500 transition hover:bg-slate-50"
-                          aria-label={`Supprimer ${item.name}`}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-
-            <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="text-xl font-semibold">Centre d’alertes</h2>
-              <p className="mt-1 text-sm text-slate-600">Notifications simulées après synchronisation</p>
-
-              <div className="mt-4 space-y-3">
-                {notifications.length === 0 ? (
-                  <div className="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-6 text-sm text-slate-500">
-                    Pas encore d’alerte. Lance une veille pour simuler l’arrivée d’un rappel.
-                  </div>
-                ) : (
-                  notifications.map((n) => (
-                    <div key={n.id} className="rounded-3xl border border-slate-200 p-4">
-                      <div className="flex items-start gap-3">
-                        {n.type === "danger" ? (
-                          <AlertTriangle className="mt-0.5 h-5 w-5 text-red-500" />
-                        ) : (
-                          <CheckCircle2 className="mt-0.5 h-5 w-5 text-emerald-500" />
-                        )}
-                        <div>
-                          <p className="font-medium text-slate-900">{n.title}</p>
-                          <p className="mt-1 text-sm text-slate-600">{n.body}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-          </section>
-=======
-  <div className="min-h-screen bg-gradient-to-b from-green-100 to-emerald-200 flex items-center justify-center p-6">
-    <div className="w-[320px] h-[640px] rounded-[32px] border-[8px] border-emerald-800 shadow-2xl overflow-hidden flex flex-col">
+  <div className="min-h-screen bg-slate-100 flex items-center justify-center p-6">
+    <div className="w-[320px] h-[640px] rounded-[32px] border-[8px] border-emerald-800 bg-white shadow-2xl overflow-hidden flex flex-col">
       
       {/* Header téléphone */}
       <div className="bg-white px-3 pt-3 pb-3 shrink-0">
-        <div className="flex justify-center">
-  <img
-    src="/logo.png"
-    alt="Logo VigiFood"
-    className="h-6 object-contain"
-  />
-</div>
+        <div className="flex items-center justify-between">
+          <div className="rounded-full bg-lime-400 px-4 py-2">
+            <span className="text-xl font-bold italic text-black">VigiFood</span>
+          </div>
+          <div className="w-20 h-4 bg-black rounded-full"></div>
+        </div>
 
         <div className="mt-3 flex justify-center">
           <div className="relative w-[130px] h-[90px]">
@@ -398,7 +207,7 @@ export default function DemoApp() {
             <div className="absolute left-1/2 top-3 -translate-x-1/2 w-[56px] h-[34px] bg-[repeating-linear-gradient(to_right,black,black_2px,white_2px,white_4px)]"></div>
             <div className="absolute left-1/2 top-[46px] -translate-x-1/2 w-[80px] h-1 bg-red-500"></div>
             <div className="absolute left-1/2 bottom-1 -translate-x-1/2 text-[10px] font-mono bg-white px-1 text-slate-700">
-              {barcode}
+              {barcode || "00000 00001"}
             </div>
           </div>
         </div>
@@ -426,115 +235,109 @@ export default function DemoApp() {
         </div>
       </div>
 
-     {/* Frigo */}
-<div className="flex-1 p-4 bg-[#dff5d0]">
-  <div
-    className="relative w-full h-full bg-cover bg-center overflow-hidden rounded-2xl border-2 border-emerald-700 shadow-inner p-3"
-    style={{ backgroundImage: "url('/fridge.png')" }}
-  >
-    {/* Notifications */}
-    {notifications.length > 0 && (
-      <div className="absolute top-2 left-2 right-2 z-20 space-y-2">
-        {notifications.slice(0, 2).map((n) => (
-          <div
-            key={n.id}
-            className="rounded-2xl border border-slate-200 bg-white/95 p-2 shadow-md"
-          >
-            <div className="flex items-start gap-2">
-              {n.type === "danger" ? (
-                <AlertTriangle className="mt-0.5 h-4 w-4 text-red-500" />
-              ) : (
-                <CheckCircle2 className="mt-0.5 h-4 w-4 text-emerald-500" />
-              )}
-              <div>
-                <p className="text-[11px] font-semibold text-slate-900">{n.title}</p>
-                <p className="text-[10px] text-slate-600">{n.body}</p>
+      {/* Frigo */}
+      <div
+        className="relative flex-1 bg-cover bg-center overflow-hidden"
+        style={{ backgroundImage: "#dbeafe" }}
+      >
+        {/* Notifications */}
+        {notifications.length > 0 && (
+          <div className="absolute top-2 left-2 right-2 z-20 space-y-2">
+            {notifications.slice(0, 2).map((n) => (
+              <div
+                key={n.id}
+                className="rounded-2xl border border-slate-200 bg-white/95 p-2 shadow-md"
+              >
+                <div className="flex items-start gap-2">
+                  {n.type === "danger" ? (
+                    <AlertTriangle className="mt-0.5 h-4 w-4 text-red-500" />
+                  ) : (
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 text-emerald-500" />
+                  )}
+                  <div>
+                    <p className="text-[11px] font-semibold text-slate-900">{n.title}</p>
+                    <p className="text-[10px] text-slate-600">{n.body}</p>
+                  </div>
+                </div>
               </div>
+            ))}
+          </div>
+        )}
+
+        {/* Produits */}
+        {filteredPantry.length === 0 ? (
+          <div className="absolute inset-0 flex items-center justify-center px-6">
+            <div className="rounded-2xl bg-white/85 px-4 py-2 text-xs text-slate-700 shadow">
+              Aucun produit dans le garde-manger.
             </div>
           </div>
-        ))}
-      </div>
-    )}
+        ) : (
+          filteredPantry.map((item) => {
+  return (
+    <div
+      key={item.gtin}
+      className={`absolute rounded-md overflow-hidden shadow-md border-2 ${
+        item.recalled ? "border-red-500" : "border-emerald-500"
+      } bg-white`}
+      style={{
+        top: item.top,
+        left: item.left,
+        width: item.width,
+        height: item.height,
+      }}
+    >
+                {item.image ? (
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-slate-100 text-[9px] text-center text-slate-600 p-1">
+                    {item.name}
+                  </div>
+                )}
 
-    {/* Produits */}
-    {filteredPantry.length === 0 ? (
-      <div className="absolute inset-0 flex items-center justify-center px-6">
-        <div className="rounded-2xl bg-white/85 px-4 py-2 text-xs text-slate-700 shadow">
-          Aucun produit dans le garde-manger.
-        </div>
-      </div>
-    ) : (
-      filteredPantry.map((item) => {
-        return (
-          <div
-            key={item.gtin}
-            className={`absolute border-2 ${
-              item.recalled ? "border-red-500" : "border-emerald-500"
-            } bg-white shadow-md flex items-center justify-center overflow-hidden rounded-md`}
-            style={{
-  top: item.top,
-  left: item.left,
-  width: item.width,
-  height: item.height,
-}}
-          >
-            {item.image ? (
-              <img
-  src={item.image}
-  alt={item.name}
-  style={{
-    width: "130%",
-    height: "130%",
-    objectFit: "contain",
-    display: "block",
-  }}
-/>
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-slate-100 text-[9px] text-center text-slate-600 p-1">
-                {item.name}
+                <button
+                  onClick={() => removeFromPantry(item.gtin)}
+                  className="absolute top-0 right-0 bg-white/90 rounded-bl px-1"
+                >
+                  <Trash2 className="h-3 w-3 text-slate-600" />
+                </button>
               </div>
-            )}
+            );
+          })
+        )}
 
-            <button
-              onClick={() => removeFromPantry(item.gtin)}
-              className="absolute top-0 right-0 bg-white/90 rounded-bl px-1"
-            >
-              <Trash2 className="h-3 w-3 text-slate-600" />
-            </button>
+        {/* Carte produit sélectionné */}
+        {selected && (
+          <div className="absolute left-3 right-3 bottom-3 z-20 rounded-2xl bg-white/95 p-3 shadow-lg border border-slate-200">
+            <div className="flex items-start justify-between gap-2">
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-slate-900 truncate">{selected.name}</p>
+                <p className="text-[11px] text-slate-600 truncate">
+                  {selected.brand} · GTIN {selected.gtin}
+                </p>
+                <p
+                  className={`mt-1 text-[11px] font-medium ${
+                    selected.recalled ? "text-red-600" : "text-emerald-600"
+                  }`}
+                >
+                  {selected.recalled ? "Produit rappelé" : "Produit sans rappel actif"}
+                </p>
+              </div>
+
+              <button
+                onClick={() => addToPantry(selected)}
+                className="shrink-0 rounded-xl bg-slate-900 px-3 py-2 text-[11px] font-medium text-white"
+              >
+                Ajouter
+              </button>
+            </div>
           </div>
-        );
-      })
-    )}
-
-    {/* Carte produit sélectionné */}
-    {selected && (
-      <div className="absolute left-3 right-3 bottom-3 z-20 rounded-2xl bg-white/95 p-3 shadow-lg border border-slate-200">
-        <div className="flex items-start justify-between gap-2">
-          <div className="min-w-0">
-            <p className="text-sm font-semibold text-slate-900 truncate">{selected.name}</p>
-            <p className="text-[11px] text-slate-600 truncate">
-              {selected.brand} · GTIN {selected.gtin}
-            </p>
-            <p
-              className={`mt-1 text-[11px] font-medium ${
-                selected.recalled ? "text-red-600" : "text-emerald-600"
-              }`}
-            >
-              {selected.recalled ? "Produit rappelé" : "Produit sans rappel actif"}
-            </p>
-          </div>
-
-          <button
-            onClick={() => addToPantry(selected)}
-            className="shrink-0 rounded-xl bg-slate-900 px-3 py-2 text-[11px] font-medium text-white"
-          >
-            Ajouter
-          </button>
-        </div>
+        )}
       </div>
-    )}
-  </div>
-</div>
+
       {/* Bas */}
       <div className="bg-white border-t border-slate-200 px-3 py-2 shrink-0">
         <div className="flex items-center justify-between gap-2">
@@ -547,9 +350,8 @@ export default function DemoApp() {
           <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-[11px] text-slate-600">
             {filteredPantry.length} produit{filteredPantry.length > 1 ? "s" : ""}
           </div>
->>>>>>> Stashed changes
         </div>
       </div>
     </div>
-  );
-}
+  </div>
+);}
