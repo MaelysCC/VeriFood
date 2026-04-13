@@ -1,3 +1,4 @@
+
 import React, { useMemo, useState } from "react";
 import { AlertTriangle, Bell, CheckCircle2, Search, ShieldAlert, Refrigerator, Trash2, ScanLine, Database, Clock3 } from "lucide-react";
 
@@ -10,8 +11,9 @@ const PRODUCTS = [
     image: "/fromage.png",
     top: "90px",
     left: "35px",
-    width: "10px",
-    height: "10px",
+    width: "120px",
+    height: "120px",
+    
   },
   {
     gtin: "3017620422003",
@@ -21,8 +23,8 @@ const PRODUCTS = [
     image: "/salade.png",
     top: "95px",
     left: "175px",
-    width: "60px",
-    height: "60px",
+    width: "120px",
+    height: "120px",
   },
 ];
 
@@ -185,17 +187,18 @@ export default function DemoApp() {
   ));
 
   return (
-  <div className="min-h-screen bg-slate-100 flex items-center justify-center p-6">
-    <div className="w-[320px] h-[640px] rounded-[32px] border-[8px] border-emerald-800 bg-white shadow-2xl overflow-hidden flex flex-col">
+  <div className="min-h-screen bg-gradient-to-b from-green-100 to-emerald-200 flex items-center justify-center p-6">
+    <div className="w-[320px] h-[640px] rounded-[32px] border-[8px] border-emerald-800 shadow-2xl overflow-hidden flex flex-col">
       
       {/* Header téléphone */}
       <div className="bg-white px-3 pt-3 pb-3 shrink-0">
-        <div className="flex items-center justify-between">
-          <div className="rounded-full bg-lime-400 px-4 py-2">
-            <span className="text-xl font-bold italic text-black">VigiFood</span>
-          </div>
-          <div className="w-20 h-4 bg-black rounded-full"></div>
-        </div>
+        <div className="flex justify-center">
+ <img
+  src="/logo.png"
+  alt="Logo VigiFood"
+  className="h-6 w-auto max-w-[120px] object-contain"
+/>
+</div>
 
         <div className="mt-3 flex justify-center">
           <div className="relative w-[130px] h-[90px]">
@@ -207,7 +210,7 @@ export default function DemoApp() {
             <div className="absolute left-1/2 top-3 -translate-x-1/2 w-[56px] h-[34px] bg-[repeating-linear-gradient(to_right,black,black_2px,white_2px,white_4px)]"></div>
             <div className="absolute left-1/2 top-[46px] -translate-x-1/2 w-[80px] h-1 bg-red-500"></div>
             <div className="absolute left-1/2 bottom-1 -translate-x-1/2 text-[10px] font-mono bg-white px-1 text-slate-700">
-              {barcode || "00000 00001"}
+              {barcode}
             </div>
           </div>
         </div>
@@ -235,109 +238,115 @@ export default function DemoApp() {
         </div>
       </div>
 
-      {/* Frigo */}
-      <div
-        className="relative flex-1 bg-cover bg-center overflow-hidden"
-        style={{ backgroundImage: "#dbeafe" }}
-      >
-        {/* Notifications */}
-        {notifications.length > 0 && (
-          <div className="absolute top-2 left-2 right-2 z-20 space-y-2">
-            {notifications.slice(0, 2).map((n) => (
-              <div
-                key={n.id}
-                className="rounded-2xl border border-slate-200 bg-white/95 p-2 shadow-md"
-              >
-                <div className="flex items-start gap-2">
-                  {n.type === "danger" ? (
-                    <AlertTriangle className="mt-0.5 h-4 w-4 text-red-500" />
-                  ) : (
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 text-emerald-500" />
-                  )}
-                  <div>
-                    <p className="text-[11px] font-semibold text-slate-900">{n.title}</p>
-                    <p className="text-[10px] text-slate-600">{n.body}</p>
-                  </div>
-                </div>
+     {/* Frigo */}
+<div className="flex-1 p-4 bg-[#dff5d0]">
+  <div
+    className="relative w-full h-full bg-cover bg-center overflow-hidden rounded-2xl border-2 border-emerald-700 shadow-inner p-3"
+    style={{ backgroundImage: "url('/fridge.png')" }}
+  >
+    {/* Notifications */}
+    {notifications.length > 0 && (
+      <div className="absolute top-2 left-2 right-2 z-20 space-y-2">
+        {notifications.slice(0, 2).map((n) => (
+          <div
+            key={n.id}
+            className="rounded-2xl border border-slate-200 bg-white/95 p-2 shadow-md"
+          >
+            <div className="flex items-start gap-2">
+              {n.type === "danger" ? (
+                <AlertTriangle className="mt-0.5 h-4 w-4 text-red-500" />
+              ) : (
+                <CheckCircle2 className="mt-0.5 h-4 w-4 text-emerald-500" />
+              )}
+              <div>
+                <p className="text-[11px] font-semibold text-slate-900">{n.title}</p>
+                <p className="text-[10px] text-slate-600">{n.body}</p>
               </div>
-            ))}
-          </div>
-        )}
-
-        {/* Produits */}
-        {filteredPantry.length === 0 ? (
-          <div className="absolute inset-0 flex items-center justify-center px-6">
-            <div className="rounded-2xl bg-white/85 px-4 py-2 text-xs text-slate-700 shadow">
-              Aucun produit dans le garde-manger.
             </div>
           </div>
-        ) : (
-          filteredPantry.map((item) => {
-  return (
-    <div
-      key={item.gtin}
-      className={`absolute rounded-md overflow-hidden shadow-md border-2 ${
-        item.recalled ? "border-red-500" : "border-emerald-500"
-      } bg-white`}
-      style={{
-        top: item.top,
-        left: item.left,
-        width: item.width,
-        height: item.height,
-      }}
-    >
-                {item.image ? (
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-slate-100 text-[9px] text-center text-slate-600 p-1">
-                    {item.name}
-                  </div>
-                )}
-
-                <button
-                  onClick={() => removeFromPantry(item.gtin)}
-                  className="absolute top-0 right-0 bg-white/90 rounded-bl px-1"
-                >
-                  <Trash2 className="h-3 w-3 text-slate-600" />
-                </button>
-              </div>
-            );
-          })
-        )}
-
-        {/* Carte produit sélectionné */}
-        {selected && (
-          <div className="absolute left-3 right-3 bottom-3 z-20 rounded-2xl bg-white/95 p-3 shadow-lg border border-slate-200">
-            <div className="flex items-start justify-between gap-2">
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-slate-900 truncate">{selected.name}</p>
-                <p className="text-[11px] text-slate-600 truncate">
-                  {selected.brand} · GTIN {selected.gtin}
-                </p>
-                <p
-                  className={`mt-1 text-[11px] font-medium ${
-                    selected.recalled ? "text-red-600" : "text-emerald-600"
-                  }`}
-                >
-                  {selected.recalled ? "Produit rappelé" : "Produit sans rappel actif"}
-                </p>
-              </div>
-
-              <button
-                onClick={() => addToPantry(selected)}
-                className="shrink-0 rounded-xl bg-slate-900 px-3 py-2 text-[11px] font-medium text-white"
-              >
-                Ajouter
-              </button>
-            </div>
-          </div>
-        )}
+        ))}
       </div>
+    )}
 
+    {/* Produits */}
+    {filteredPantry.length === 0 ? (
+      <div className="absolute inset-0 flex items-center justify-center px-6">
+        <div className="rounded-2xl bg-white/85 px-4 py-2 text-xs text-slate-700 shadow">
+          Aucun produit dans le garde-manger.
+        </div>
+      </div>
+    ) : (
+      filteredPantry.map((item) => {
+        return (
+          <div
+            key={item.gtin}
+            className={`absolute border-2 ${
+              item.recalled ? "border-red-500" : "border-emerald-500"
+            } bg-white shadow-md flex items-center justify-center overflow-hidden rounded-md`}
+            style={{
+  top: item.top,
+  left: item.left,
+  width: item.width,
+  height: item.height,
+}}
+          >
+            {item.image ? (
+              <img
+  src={item.image}
+  alt={item.name}
+  style={{
+    width: "130%",
+    height: "130%",
+    objectFit: "contain",
+    display: "block",
+  }}
+/>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-slate-100 text-[9px] text-center text-slate-600 p-1">
+                {item.name}
+              </div>
+            )}
+
+            <button
+              onClick={() => removeFromPantry(item.gtin)}
+              className="absolute top-0 right-0 bg-white/90 rounded-bl px-1"
+            >
+              <Trash2 className="h-3 w-3 text-slate-600" />
+            </button>
+          </div>
+        );
+      })
+    )}
+
+    {/* Carte produit sélectionné */}
+    {selected && (
+      <div className="absolute left-3 right-3 bottom-3 z-20 rounded-2xl bg-white/95 p-3 shadow-lg border border-slate-200">
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-slate-900 truncate">{selected.name}</p>
+            <p className="text-[11px] text-slate-600 truncate">
+              {selected.brand} · GTIN {selected.gtin}
+            </p>
+            <p
+              className={`mt-1 text-[11px] font-medium ${
+                selected.recalled ? "text-red-600" : "text-emerald-600"
+              }`}
+            >
+              {selected.recalled ? "Produit rappelé" : "Produit sans rappel actif"}
+            </p>
+          </div>
+
+          <button
+            onClick={() => addToPantry(selected)}
+            className="shrink-0 rounded-xl bg-slate-900 px-3 py-2 text-[11px] font-medium text-white"
+          >
+            Ajouter
+          </button>
+        </div>
+      </div>
+    )}
+  </div>
+</div>
       {/* Bas */}
       <div className="bg-white border-t border-slate-200 px-3 py-2 shrink-0">
         <div className="flex items-center justify-between gap-2">
