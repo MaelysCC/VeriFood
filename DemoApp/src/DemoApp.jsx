@@ -19,6 +19,7 @@ const PRODUCTS = [
     brand: "DemoTerroir",
     category: "Fromages",
     recalled: true,
+<<<<<<< Updated upstream
     riskLevel: "Élevé",
     risk: "Listeria monocytogenes",
     recallReason: "Suspicion de contamination microbiologique.",
@@ -26,6 +27,14 @@ const PRODUCTS = [
     storage: "Conserver entre 0°C et 4°C. Ne pas consommer si rappel actif.",
     expiryAdvice: "Produit sensible, éviter toute consommation en cas de doute.",
     purchasedAt: null,
+=======
+    image: "/fromage.png",
+    top: "90px",
+    left: "35px",
+    width: "120px",
+    height: "120px",
+    
+>>>>>>> Stashed changes
   },
   {
     gtin: "3017620422003",
@@ -33,6 +42,7 @@ const PRODUCTS = [
     brand: "DemoChoco",
     category: "Épicerie",
     recalled: false,
+<<<<<<< Updated upstream
     riskLevel: "Faible",
     storage: "À conserver à température ambiante, à l’abri de la chaleur.",
     expiryAdvice: "Bien refermer après ouverture.",
@@ -48,6 +58,13 @@ const PRODUCTS = [
     storage: "Conserver au frais après ouverture et consommer dans les 48 h.",
     expiryAdvice: "Ne pas boire si l’emballage est gonflé ou abîmé.",
     purchasedAt: null,
+=======
+    image: "/salade.png",
+    top: "95px",
+    left: "175px",
+    width: "120px",
+    height: "120px",
+>>>>>>> Stashed changes
   },
 ];
 
@@ -210,6 +227,7 @@ export default function DemoApp() {
   ));
 
   return (
+<<<<<<< Updated upstream
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <div className="mx-auto max-w-7xl p-6 md:p-10">
         <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
@@ -356,6 +374,180 @@ export default function DemoApp() {
               </div>
             </div>
           </section>
+=======
+  <div className="min-h-screen bg-gradient-to-b from-green-100 to-emerald-200 flex items-center justify-center p-6">
+    <div className="w-[320px] h-[640px] rounded-[32px] border-[8px] border-emerald-800 shadow-2xl overflow-hidden flex flex-col">
+      
+      {/* Header téléphone */}
+      <div className="bg-white px-3 pt-3 pb-3 shrink-0">
+        <div className="flex justify-center">
+  <img
+    src="/logo.png"
+    alt="Logo VigiFood"
+    className="h-6 object-contain"
+  />
+</div>
+
+        <div className="mt-3 flex justify-center">
+          <div className="relative w-[130px] h-[90px]">
+            <div className="absolute left-0 top-0 h-6 w-6 border-l-[5px] border-t-[5px] border-slate-700"></div>
+            <div className="absolute right-0 top-0 h-6 w-6 border-r-[5px] border-t-[5px] border-slate-700"></div>
+            <div className="absolute left-0 bottom-0 h-6 w-6 border-l-[5px] border-b-[5px] border-slate-700"></div>
+            <div className="absolute right-0 bottom-0 h-6 w-6 border-r-[5px] border-b-[5px] border-slate-700"></div>
+
+            <div className="absolute left-1/2 top-3 -translate-x-1/2 w-[56px] h-[34px] bg-[repeating-linear-gradient(to_right,black,black_2px,white_2px,white_4px)]"></div>
+            <div className="absolute left-1/2 top-[46px] -translate-x-1/2 w-[80px] h-1 bg-red-500"></div>
+            <div className="absolute left-1/2 bottom-1 -translate-x-1/2 text-[10px] font-mono bg-white px-1 text-slate-700">
+              {barcode}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-3 flex gap-2">
+          <div className="relative flex-1">
+            <ScanLine className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <input
+              value={barcode}
+              onChange={(e) => setBarcode(e.target.value)}
+              placeholder="Code-barres GTIN"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 pl-10 pr-3 text-xs outline-none"
+            />
+          </div>
+          <button
+            onClick={() => handleScan()}
+            className="rounded-xl bg-slate-900 px-3 py-2 text-xs font-medium text-white"
+          >
+            Scanner
+          </button>
+        </div>
+
+        <div className="mt-2 grid grid-cols-2 gap-2">
+          {quickScanButtons}
+        </div>
+      </div>
+
+     {/* Frigo */}
+<div className="flex-1 p-4 bg-[#dff5d0]">
+  <div
+    className="relative w-full h-full bg-cover bg-center overflow-hidden rounded-2xl border-2 border-emerald-700 shadow-inner p-3"
+    style={{ backgroundImage: "url('/fridge.png')" }}
+  >
+    {/* Notifications */}
+    {notifications.length > 0 && (
+      <div className="absolute top-2 left-2 right-2 z-20 space-y-2">
+        {notifications.slice(0, 2).map((n) => (
+          <div
+            key={n.id}
+            className="rounded-2xl border border-slate-200 bg-white/95 p-2 shadow-md"
+          >
+            <div className="flex items-start gap-2">
+              {n.type === "danger" ? (
+                <AlertTriangle className="mt-0.5 h-4 w-4 text-red-500" />
+              ) : (
+                <CheckCircle2 className="mt-0.5 h-4 w-4 text-emerald-500" />
+              )}
+              <div>
+                <p className="text-[11px] font-semibold text-slate-900">{n.title}</p>
+                <p className="text-[10px] text-slate-600">{n.body}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {/* Produits */}
+    {filteredPantry.length === 0 ? (
+      <div className="absolute inset-0 flex items-center justify-center px-6">
+        <div className="rounded-2xl bg-white/85 px-4 py-2 text-xs text-slate-700 shadow">
+          Aucun produit dans le garde-manger.
+        </div>
+      </div>
+    ) : (
+      filteredPantry.map((item) => {
+        return (
+          <div
+            key={item.gtin}
+            className={`absolute border-2 ${
+              item.recalled ? "border-red-500" : "border-emerald-500"
+            } bg-white shadow-md flex items-center justify-center overflow-hidden rounded-md`}
+            style={{
+  top: item.top,
+  left: item.left,
+  width: item.width,
+  height: item.height,
+}}
+          >
+            {item.image ? (
+              <img
+  src={item.image}
+  alt={item.name}
+  style={{
+    width: "130%",
+    height: "130%",
+    objectFit: "contain",
+    display: "block",
+  }}
+/>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-slate-100 text-[9px] text-center text-slate-600 p-1">
+                {item.name}
+              </div>
+            )}
+
+            <button
+              onClick={() => removeFromPantry(item.gtin)}
+              className="absolute top-0 right-0 bg-white/90 rounded-bl px-1"
+            >
+              <Trash2 className="h-3 w-3 text-slate-600" />
+            </button>
+          </div>
+        );
+      })
+    )}
+
+    {/* Carte produit sélectionné */}
+    {selected && (
+      <div className="absolute left-3 right-3 bottom-3 z-20 rounded-2xl bg-white/95 p-3 shadow-lg border border-slate-200">
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-slate-900 truncate">{selected.name}</p>
+            <p className="text-[11px] text-slate-600 truncate">
+              {selected.brand} · GTIN {selected.gtin}
+            </p>
+            <p
+              className={`mt-1 text-[11px] font-medium ${
+                selected.recalled ? "text-red-600" : "text-emerald-600"
+              }`}
+            >
+              {selected.recalled ? "Produit rappelé" : "Produit sans rappel actif"}
+            </p>
+          </div>
+
+          <button
+            onClick={() => addToPantry(selected)}
+            className="shrink-0 rounded-xl bg-slate-900 px-3 py-2 text-[11px] font-medium text-white"
+          >
+            Ajouter
+          </button>
+        </div>
+      </div>
+    )}
+  </div>
+</div>
+      {/* Bas */}
+      <div className="bg-white border-t border-slate-200 px-3 py-2 shrink-0">
+        <div className="flex items-center justify-between gap-2">
+          <button
+            onClick={simulateRecallCheck}
+            className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-medium text-slate-700"
+          >
+            Simuler une veille
+          </button>
+          <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-[11px] text-slate-600">
+            {filteredPantry.length} produit{filteredPantry.length > 1 ? "s" : ""}
+          </div>
+>>>>>>> Stashed changes
         </div>
       </div>
     </div>
