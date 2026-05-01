@@ -1,7 +1,7 @@
-import VigifoodDemoApp from "./DemoApp";
+import VigifoodApp from "./DemoApp";
 
 function App() {
-  return <VigifoodDemoApp />;
+  return <VigifoodApp />;
 }
 
 export default App;
